@@ -1,0 +1,14 @@
+.drop-zone {
+    position:absolute;
+    text-align: center;
+	width:50%;
+	height:90vh;
+	background-color: transparent;
+    border-radius: 3.6em;
+}
+#drop-zone {
+	color:cyan;
+    border: 1.8em dashed cyan;
+}
+
+#drop-zone.onTop {border: 1.8em dashed lime;}
