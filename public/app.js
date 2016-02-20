@@ -33,7 +33,7 @@
         }
 	}
 
-    $("#upload").on("click", function () {
+    $("#upload-btn").on("click", function () {
 		uploadedFileCheck("#fileUpload",1);
     });
 
