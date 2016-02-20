@@ -3,7 +3,7 @@
 	var processDropped = function(eventTarget){
         // let's just work with one file
         var file = eventTarget.dataTransfer.files[0];
-        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.wav)$/;
+        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.txt)$/;
         //console.log("Type: " + file.type);                        for debug use
         //console.log(regex.test(file.name.toLowerCase()));
         if (regex.test(file.name.toLowerCase())) {
