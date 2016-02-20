@@ -7,11 +7,14 @@
         //console.log("Type: " + file.type);                        for debug use
         //console.log(regex.test(file.name.toLowerCase()));
         if (regex.test(file.name.toLowerCase())) {
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-                            generateArr(e);
-                    }
-                    reader.readAsText(file);
+				//PREPARE DATA AND SEND
+					var formData = new FormData();
+
+					// HTML file input, chosen by user
+					formData.append("userfile", file);
+					var request = new XMLHttpRequest();
+					request.open("POST", window.location.href);
+					request.send(formData);
         } else {
         alert("Please upload a valid CSV file.");
         }
@@ -20,11 +23,16 @@
 		var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.tsv|.csv|.txt)$/;
         if (regex.test($(str).val().toLowerCase())) {
             if (typeof (FileReader) != "undefined") {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    generateArr(e);
-                }
-                reader.readAsText($(str)[0].files[0]);
+				
+				//PREPARE DATA AND SEND
+					var formData = new FormData();
+
+					// HTML file input, chosen by user
+					formData.append("userfile", $("#fileUpload")[0].files[0]);
+					var request = new XMLHttpRequest();
+					request.open("POST", window.location.href);
+					request.send(formData);
+				
             } else {
                 alert("This browser does not support HTML5.");
             }
