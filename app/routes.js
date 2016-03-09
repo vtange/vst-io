@@ -9,7 +9,7 @@ var uploadFile = function(req, res) {
 }
 
 // app/routes.js
-module.exports = function(app, passport) {
+module.exports = function(app) {
 
     // =====================================
     // HOME PAGE (with login links) ========

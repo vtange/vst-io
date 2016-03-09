@@ -5,14 +5,15 @@
     <title>Home</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-    <link rel="stylesheet" href="index.css"> <!-- load fontawesome -->
+    <link rel="stylesheet" href="index.css"> <!-- load styles -->
 	<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script> <!-- load jq -->
 	<script src="app.js"></script> <!-- load app -->
 </head>
 <body>
-<%- include partials/header.ejs %>
+<%- include ../node_modules/basic-login-bar/views/partials/header.ejs %>
 <div class="container">
-		<div id="drop-zone" class="drop-zone"><h1>File1</h1><h2>Drag &amp; Drop or <input type="file" id="fileUpload"><input type="button" id="upload-btn" value="Upload" /></h2><!--shows only when no file--></div>
+<div id="drop-zone" class="drop-zone"><h1>File1</h1><h2>Drag &amp; Drop or <input type="file" id="fileUpload"><input type="button" id="upload-btn" value="Upload" /></h2><!--shows only when no file--></div>
+
 </div>
 </body>
 </html>
