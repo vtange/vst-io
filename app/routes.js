@@ -1,4 +1,4 @@
-console.log("	APP/ROUTES.JS")
+console.log("	APP/ROUTES.JS");
 var multer  = require('multer');
 var storage = multer.memoryStorage();
 var upload = multer({ storage: storage, dest: './tmp/'});

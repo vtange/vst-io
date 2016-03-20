@@ -26,8 +26,8 @@ var bodyParser   = require('body-parser');
 var methodOverride = require('method-override');
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser.urlencoded({ extended: false }))    // parse application/x-www-form-urlencoded
-app.use(bodyParser.json())    // parse application/json
+app.use(bodyParser.urlencoded({ extended: false }));    // parse application/x-www-form-urlencoded
+app.use(bodyParser.json());    // parse application/json
 app.use(methodOverride());                  // simulate DELETE and PUT
 
 // required for passport
