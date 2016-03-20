@@ -10,6 +10,10 @@ var mongoose = require('mongoose');
 var configDB = require('./config/database.js');
 mongoose.connect(configDB.url); // connect to our database
 
+// get project information
+var package = require('./package.json');
+app.title = package.title;
+
 var flash    = require('connect-flash');
 var session  = require('express-session');
 var passport = require('passport');

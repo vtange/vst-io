@@ -1,5 +1,6 @@
 {
   "name": "VST-IO",
+  "title": "VST-IO",
   "version": "1.0.0",
   "description": "Process an audio file with a VST",
   "scripts": {
