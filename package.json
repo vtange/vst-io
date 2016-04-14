@@ -7,7 +7,7 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "basic-login-bar": "^1.0.0",
+    "really-basic-login-bar": "^1.0.4",
     "bcrypt-nodejs": "latest",
 	"body-parser": "~1.0.0",
     "connect-flash": "^0.1.1",
@@ -20,12 +20,7 @@
 	"method-override": "~1.0.0",
     "mongoose": "~3.8.1",
 	"morgan": "~1.0.0",
-	"multer": "^1.1.0",
-	"node-vst-host": "0.0.3",
 	"passport": "~0.1.17",
-    "passport-facebook": "~1.0.2",
-    "passport-google-oauth": "~0.1.5",
-    "passport-local": "~0.1.6",
-    "passport-twitter": "~1.0.2"
+    "passport-local": "~0.1.6"
   }
 }
