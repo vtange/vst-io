@@ -1,4 +1,4 @@
-<!-- views/index.ejs -->
+<!-- views/main.hbs -->
 <!doctype html>
 <html>
 <head>
@@ -10,10 +10,7 @@
 	<script src="app.js"></script> <!-- load app -->
 </head>
 <body>
-<%- include ../node_modules/basic-login-bar/views/partials/header.ejs %>
-<div class="container">
-<div id="drop-zone" class="drop-zone"><h1>File1</h1><h2>Drag &amp; Drop or <input type="file" id="fileUpload"><input type="button" id="upload-btn" value="Upload" /></h2><!--shows only when no file--></div>
-
-</div>
+{{>header}}
+{{{body}}}
 </body>
 </html>

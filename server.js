@@ -2,6 +2,7 @@
 // set up ======================================================================
 // get all the tools we need
 var express  = require('express');
+var exphbs = require('express-handlebars');
 var app      = express();
 var port     = process.env.PORT || 8080;
 
@@ -31,19 +32,51 @@ app.use(bodyParser.json());    // parse application/json
 app.use(methodOverride());                  // simulate DELETE and PUT
 
 // required for passport
-app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.use(session({ secret: 'insert_secret_here' })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
-// set up client files
-app.set('view engine', 'ejs'); 
+// create handlebars instance with exphbs
+var hbs = exphbs.create({
+		defaultLayout: 'main',
+		extname: '.hbs',
+		layoutsDir:"views/layouts/",
+		partialsDir:["views/partials/","node_modules/hbs-header/views/partials/"],
+		helpers: {
+			ifCond: function (v1, operator, v2, options) {
+
+				switch (operator) {
+					case '==':
+						return (v1 == v2) ? options.fn(this) : options.inverse(this);
+					case '===':
+						return (v1 === v2) ? options.fn(this) : options.inverse(this);
+					case '<':
+						return (v1 < v2) ? options.fn(this) : options.inverse(this);
+					case '<=':
+						return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+					case '>':
+						return (v1 > v2) ? options.fn(this) : options.inverse(this);
+					case '>=':
+						return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+					case '&&':
+						return (v1 && v2) ? options.fn(this) : options.inverse(this);
+					case '||':
+						return (v1 || v2) ? options.fn(this) : options.inverse(this);
+					default:
+						return options.inverse(this);
+				}
+			}
+		}//end helpers
+	});
+app.engine('hbs', hbs.engine);			//define hbs
+app.set('view engine', 'hbs');			//use hbs
 app.use(express.static(__dirname + '/public'));     // set the static files location /public/img will be /img for users
-app.use('/users', express.static(__dirname + '/public'));     // use css/index.css for acct management pages
+app.use('/users', express.static(__dirname + '/public'));	//use index.css for login logout pages
 
 // set up our routes
 require('./app/routes.js')(app); // use "/" from own /app/routes.js
-require('really-basic-login-bar')(app,session,passport);
+require('hbs-header')(app,session,passport);
 
 
 app.listen(port);

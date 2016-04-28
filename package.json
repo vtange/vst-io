@@ -1,26 +1,26 @@
 {
-  "name": "VST-IO",
-  "title": "VST-IO",
+  "name": "vst-io",
+  "title": "vst-io",
   "version": "1.0.0",
-  "description": "Process an audio file with a VST",
+  "description": "New App Goodness",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "really-basic-login-bar": "^1.0.4",
     "bcrypt-nodejs": "latest",
-	"body-parser": "~1.0.0",
+    "body-parser": "~1.0.0",
     "connect-flash": "^0.1.1",
-	"cookie-parser": "~1.0.0",
-    "ejs": "~0.8.5",
+    "cookie-parser": "~1.0.0",
     "express": "~4.0.0",
-    "express-handlebars": "^2.0.1",
+    "express-handlebars": "^3.0.0",
     "express-session": "~1.0.0",
     "gravatar": "^1.4.0",
-	"method-override": "~1.0.0",
+    "hbs-header": "^1.0.1",
+    "method-override": "~1.0.0",
     "mongoose": "~3.8.1",
-	"morgan": "~1.0.0",
-	"passport": "~0.1.17",
+    "morgan": "~1.0.0",
+    "multer": "^1.1.0",
+    "passport": "~0.1.17",
     "passport-local": "~0.1.6"
   }
 }
