@@ -3,8 +3,17 @@ var storage = multer.memoryStorage();
 var upload = multer({ storage: storage, dest: './tmp/'});
 
 var uploadFile = function(req, res) {
-	console.log(req.file);
-	res.send(JSON.stringify(req.file));
+	console.log(req.files);
+	var sampleFile = req.files.userfile;
+	sampleFile.mv(__dirname + '/file.txt', function(err) {
+		if (err) {
+			console.log(err);
+			res.status(500).send(err);
+		}
+		else {
+			res.send('File uploaded!');
+		}
+	});
 };
 
 // app/routes.js

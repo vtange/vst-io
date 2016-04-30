@@ -2,6 +2,7 @@
 // set up ======================================================================
 // get all the tools we need
 var express  = require('express');
+var fileUpload = require('express-fileupload');
 var exphbs = require('express-handlebars');
 var app      = express();
 var port     = process.env.PORT || 8080;
@@ -30,6 +31,7 @@ app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.urlencoded({ extended: false }));    // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());    // parse application/json
 app.use(methodOverride());                  // simulate DELETE and PUT
+app.use(fileUpload());
 
 // required for passport
 app.use(session({ secret: 'insert_secret_here' })); // session secret
