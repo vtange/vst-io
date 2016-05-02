@@ -2,16 +2,49 @@ var multer  = require('multer');
 var storage = multer.memoryStorage();
 var upload = multer({ storage: storage, dest: './tmp/'});
 
+//audio processor
+var SoxCommand = require('sox-audio');
+var fs = require('fs');
+var addStandardListeners = function(command) {
+	command.on('start', function(commandLine) {
+		console.log('Spawned sox with command ' + commandLine);
+	});
+
+	command.on('progress', function(progress) {
+	    console.log('Processing progress: ', progress);
+	});
+
+	command.on('error', function(err, stdout, stderr) {
+	    console.log('Cannot process audio: ' + err.message);
+	    console.log('Sox Command Stdout: ', stdout);
+	    console.log('Sox Command Stderr: ', stderr)
+	});
+
+	command.on('end', function() {
+	    console.log('Sox command succeeded!');
+	});
+};
+var toWav = function(fileName, outputName) {
+	var command = SoxCommand();
+	command.input(fileName);
+	command.output(outputName)
+		.outputFileType('wav')
+
+	addStandardListeners(command);
+	command.run()
+	return command;
+};
+
 var uploadFile = function(req, res) {
 	console.log(req.files);
 	var sampleFile = req.files.userfile;
-	sampleFile.mv(__dirname + '/file.txt', function(err) {
+	sampleFile.mv(__dirname + '/file.mp3', function(err) {
 		if (err) {
 			console.log(err);
 			res.status(500).send(err);
 		}
 		else {
-			res.send('File uploaded!');
+			toWav(__dirname + '/file.mp3','filewav.wav');
 		}
 	});
 };
