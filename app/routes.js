@@ -2,6 +2,17 @@ var multer  = require('multer');
 var storage = multer.memoryStorage();
 var upload = multer({ storage: storage, dest: './tmp/'});
 
+//VST host
+var VSTHost = require("node-vst-host").host;
+ 
+var host = new VSTHost();
+ 
+// Print our a list of the available plugins 
+host.listPlugins( function(names) {
+	console.log( "Available Plugins");
+	console.log( names );
+});
+
 //audio processor
 var SoxCommand = require('sox-audio');
 var fs = require('fs');
@@ -34,6 +45,7 @@ var toWav = function(fileName, outputName) {
 	command.run()
 	return command;
 };
+
 
 var uploadFile = function(req, res) {
 	console.log(req.files);
