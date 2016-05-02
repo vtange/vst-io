@@ -38,13 +38,13 @@ var toWav = function(fileName, outputName) {
 var uploadFile = function(req, res) {
 	console.log(req.files);
 	var sampleFile = req.files.userfile;
-	sampleFile.mv(__dirname + '/file.mp3', function(err) {
+	sampleFile.mv(__dirname + '/' + req.files.userfile.name, function(err) {
 		if (err) {
 			console.log(err);
 			res.status(500).send(err);
 		}
 		else {
-			toWav(__dirname + '/file.mp3','filewav.wav');
+			toWav(__dirname + '/' +  req.files.userfile.name, req.files.userfile.name.slice(0,req.files.userfile.name.length-4)+'.wav');
 		}
 	});
 };
