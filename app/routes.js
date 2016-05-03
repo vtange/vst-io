@@ -47,15 +47,19 @@ function toWav(fileName, outputName) {
 };
 function deEss(fileName, outputName) {
 	return new Promise(function(resolve, reject) {
-		host.processAudio( __dirname + "/" + "utterance_0.wav", __dirname + "/" + "utterance.wav", [{name:__dirname +"/"+"test_VST.dll", preset:__dirname +"/"+"test_VST.fxp"}]);
-			/*^.err(function(){
-				//woops, couldn't process your file
-			}).then(function(){
-				//move on to vst application
-				
-			})*/
+		host.processAudio( __dirname + "/" + "utterance_0.wav", __dirname + "/" + "utterance.wav", [{name:__dirname +"/"+"test_VST.dll", preset:__dirname +"/"+"test_VST.fxp"}], resolve, reject);
 	});
 };
+
+function VSTprocess(fn, fileName, outputName){
+	fn(fileName, outputName).then(function(){
+					//finished VST
+					console.log("VST processed :D")
+				},function(){
+					//broke VST
+					console.log("something went wrong in VSTmode")
+				})
+}
 
 var uploadFile = function(req, res) {
 	console.log(req.files);
@@ -67,15 +71,17 @@ var uploadFile = function(req, res) {
 		}
 		else {
 			//determine what process from req.body
-			
+			var vst = deEss;
 			//default processing
 			toWav(__dirname + '/' +  req.files.userfile.name, req.files.userfile.name.slice(0,req.files.userfile.name.length-4)+'.wav');
-			/*^.err(function(){
-				//woops, couldn't process your file
-			}).then(function(){
-				//move on to vst application
-				
-			})*/
+			.then(function(){
+				//goodCB -> process with VST
+				VSTprocess(vst, fileName, outputName)
+
+			},function(){
+				//errCB -> "woops, couldn't process your file"
+				console.log("something went wrong in conversion mode")
+			})
 		}
 	});
 };
