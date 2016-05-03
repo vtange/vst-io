@@ -15,7 +15,6 @@ host.listPlugins( function(names) {
 
 //audio processor
 var SoxCommand = require('sox-audio');
-var fs = require('fs');
 var addStandardListeners = function(command) {
 	command.on('start', function(commandLine) {
 		console.log('Spawned sox with command ' + commandLine);
