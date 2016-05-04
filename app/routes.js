@@ -47,7 +47,7 @@ function toWav(fileName, outputName) {
 };
 function deEss(fileName, outputName) {
 	return new Promise(function(resolve, reject) {
-		host.processAudio( __dirname + "/" + "utterance_0.wav", __dirname + "/" + "utterance.wav", [{name:__dirname +"/"+"test_VST.dll", preset:__dirname +"/"+"test_VST.fxp"}], resolve, reject);
+		host.processAudio( fileName, outputName, [{name:__dirname +"/"+"test_VST.dll", preset:__dirname +"/"+"test_VST.fxp"}], resolve, reject);
 	});
 };
 
@@ -72,11 +72,13 @@ var uploadFile = function(req, res) {
 		else {
 			//determine what process from req.body
 			var vst = deEss;
-			//default processing
-			toWav(__dirname + '/' +  req.files.userfile.name, req.files.userfile.name.slice(0,req.files.userfile.name.length-4)+'.wav');
+			var fileName = __dirname + '/' +  req.files.userfile.name;
+			var outputName = req.files.userfile.name.slice(0,req.files.userfile.name.length-4);
+			//default processing (conv to WAV, process, output WAV)
+			toWav( fileName, outputName+'.wav' )
 			.then(function(){
 				//goodCB -> process with VST
-				VSTprocess(vst, fileName, outputName)
+				VSTprocess(vst, outputName+'.wav', '[tweak]'+outputName+'.wav')
 
 			},function(){
 				//errCB -> "woops, couldn't process your file"
