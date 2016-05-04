@@ -75,7 +75,7 @@ body, .btn, #header > #group1 > a{
 
 /* CUSTOM */
 body{
-	background-color:#434350;
+	background-color:#aa9977;
 }
 
 .drop-zone {
@@ -86,14 +86,13 @@ body{
     border-radius: 3.6em;
 }
 #drop-zone {
-	color:cyan;
-    border: 1.8em dashed cyan;
+	color:black;
+    border: 1.8em dashed black;
 }
 
-#drop-zone.onTop {border: 1.8em dashed lime;}
+#drop-zone.onTop {border-color: white;}
 
 #fileUpload{
-	display:inline;
 }
 
 #upload-btn{
