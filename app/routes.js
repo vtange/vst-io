@@ -52,13 +52,15 @@ function deEss(fileName, outputName) {
 };
 
 function VSTprocess(fn, fileName, outputName){
-	fn(fileName, outputName).then(function(){
-					//finished VST
-					console.log("VST processed :D")
-				},function(){
-					//broke VST
-					console.log("something went wrong in VSTmode")
-				})
+	fn(fileName, outputName)
+		.then(function(){
+			//finished VST
+			console.log("VST processed :D")
+		})
+		.catch(function(){
+			//broke VST
+			console.log("something went wrong in VSTmode")
+		});
 }
 
 var uploadFile = function(req, res) {
@@ -80,10 +82,11 @@ var uploadFile = function(req, res) {
 				//goodCB -> process with VST
 				VSTprocess(vst, outputName+'.wav', '[tweak]'+outputName+'.wav')
 
-			},function(){
+			})
+			.catch(function(){
 				//errCB -> "woops, couldn't process your file"
 				console.log("something went wrong in conversion mode")
-			})
+			});
 		}
 	});
 };
