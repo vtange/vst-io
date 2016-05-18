@@ -7,6 +7,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "app-root-path": "^1.0.0",
     "bcrypt-nodejs": "latest",
     "bluebird": "^3.3.5",
     "body-parser": "~1.0.0",

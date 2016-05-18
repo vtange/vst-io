@@ -1,19 +1,24 @@
 var multer  = require('multer');
 var storage = multer.memoryStorage();
 var upload = multer({ storage: storage, dest: './tmp/'});
-var Promise = require("bluebird");
+var Promise = require('bluebird');
 
-//VST host
-var VSTHost = require("node-vst-host").host;
+// Workspace directory PATH (string)
+var appRoot = require('app-root-path');
+var workspace_dir = __dirname + '/workspace/';
+var vst_dir = appRoot + "/";
+
+// VST host
+var VSTHost = require('node-vst-host').host;
 var host = new VSTHost();
 
-// Print our a list of the available plugins 
+// Print list of the available plugins 
 host.listPlugins( function(names) {
-	console.log( "Available Plugins");
+	console.log( 'Available Plugins' );
 	console.log( names );
 });
 
-//audio processor
+// Audio processor
 var SoxCommand = require('sox-audio');
 var addStandardListeners = function(command) {
 	command.on('start', function(commandLine) {
@@ -47,7 +52,7 @@ function toWav(fileName, outputName) {
 };
 function deEss(fileName, outputName) {
 	return new Promise(function(resolve, reject) {
-		host.processAudio( fileName, outputName, [{name:__dirname +"/"+"test_VST.dll", preset:__dirname +"/"+"test_VST.fxp"}], resolve, reject);
+		host.processAudio( fileName, outputName, [{name:vst_dir+"test_VST.dll", preset:vst_dir+"test_VST.fxp"}], resolve, reject);
 	});
 };
 
@@ -64,9 +69,8 @@ function VSTprocess(fn, fileName, outputName){
 }
 
 var uploadFile = function(req, res) {
-	console.log(req.files);
-	var sampleFile = req.files.userfile;
-	sampleFile.mv(__dirname + '/' + req.files.userfile.name, function(err) {
+	var file = req.files.userfile;
+	file.mv(workspace_dir + file.name, function(err) {
 		if (err) {
 			console.log(err);
 			res.status(500).send(err);
@@ -74,13 +78,14 @@ var uploadFile = function(req, res) {
 		else {
 			//determine what process from req.body
 			var vst = deEss;
-			var fileName = __dirname + '/' +  req.files.userfile.name;
-			var outputName = req.files.userfile.name.slice(0,req.files.userfile.name.length-4);
+
+			var fileName = file.name;
+			var outputName = fileName.slice(0,fileName.length-4);
 			//default processing (conv to WAV, process, output WAV)
-			toWav( fileName, outputName+'.wav' )
+			toWav( workspace_dir + fileName, workspace_dir + outputName+'.wav' )
 			.then(function(){
 				//goodCB -> process with VST
-				VSTprocess(vst, outputName+'.wav', '[tweak]'+outputName+'.wav')
+				VSTprocess(vst, workspace_dir + outputName+'.wav',  workspace_dir + '[tweak]'+outputName+'.wav')
 
 			})
 			.catch(function(){
