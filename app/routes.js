@@ -32,7 +32,7 @@ var addStandardListeners = function(command) {
 	command.on('error', function(err, stdout, stderr) {
 	    console.log('Cannot process audio: ' + err.message);
 	    console.log('Sox Command Stdout: ', stdout);
-	    console.log('Sox Command Stderr: ', stderr)
+	    console.log('Sox Command Stderr: ', stderr);
 	});
 
 	command.on('end', function() {
@@ -44,7 +44,7 @@ function toWav(fileName, outputName) {
 		var command = SoxCommand();
 		command.input(fileName);
 		command.output(outputName)
-			.outputFileType('wav')
+			.outputFileType('wav');
 
 		addStandardListeners(command);
 		command.run(reject, resolve);
@@ -60,11 +60,11 @@ function VSTprocess(fn, fileName, outputName){
 	fn(fileName, outputName)
 		.then(function(){
 			//finished VST
-			console.log("VST processed :D")
+			console.log("VST processed :D");
 		})
 		.catch(function(){
 			//broke VST
-			console.log("something went wrong in VSTmode")
+			console.log("something went wrong in VSTmode");
 		});
 }
 
@@ -79,18 +79,19 @@ var uploadFile = function(req, res) {
 			//determine what process from req.body
 			var vst = deEss;
 
+			//process
 			var fileName = file.name;
 			var outputName = fileName.slice(0,fileName.length-4);
 			//default processing (conv to WAV, process, output WAV)
 			toWav( workspace_dir + fileName, workspace_dir + outputName+'.wav' )
 			.then(function(){
 				//goodCB -> process with VST
-				VSTprocess(vst, workspace_dir + outputName+'.wav',  workspace_dir + '[tweak]'+outputName+'.wav')
+				VSTprocess(vst, workspace_dir + outputName+'.wav',  workspace_dir + '[tweak]'+outputName+'.wav');
 
 			})
 			.catch(function(){
 				//errCB -> "woops, couldn't process your file"
-				console.log("something went wrong in conversion mode")
+				console.log("something went wrong in conversion mode");
 			});
 		}
 	});
