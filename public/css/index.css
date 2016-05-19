@@ -89,6 +89,7 @@ body, .btn, #header > #group1 > a{
 	color:black;
     border: 1.8em dashed black;
 	border-radius: 3.6em;
+	position: relative;
 }
 
 #drop-zone.onTop {border-color: white;}
@@ -96,6 +97,19 @@ body, .btn, #header > #group1 > a{
 #upload-btn{
 	margin: 0 auto;
 	display:block
+}
+/* Right Arrow */
+.wrapper-dropdown:after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    margin-top: -6px;
+    border-width: 6px 6px 0 6px;
+    border-style: solid;
+    border-color: #654b26 transparent;    
 }
 /*------------*/
 /* CUSTOM FILE UPLOAD */
@@ -250,7 +264,7 @@ input[type="file"] {
 .tab-menu-container{
 	position:relative;
 }
-.tab-menu{
+.tab-menu, #workflow{
 	overflow:hidden;
 
 	display: flex;
