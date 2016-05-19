@@ -2,13 +2,25 @@
 <div class="container">
 	<div id="drop-zone" class="drop-zone">
 		<h1>
-			<input type="file" id="fileUpload" style="margin:auto;">
+			<input type="file" id="file-upload" style="margin:auto;">
 			<div style="margin:2rem;">
 				<p>Tweak this file</p>
 				<p>to be</p>
 			</div>
-			<input type="options"/>
+			<div class="wrapper-dropdown">
+				<span>Louder</span>
+			</div>
+			<ul class="dropdown" style="display:none;">
+				<li>All Trades</li>
+				<li>My Trades</li>
+			</ul>
 			<input type="button" id="upload-btn" value="Go!" />
 		</h1>
+	</div>
+	<div id="progress">
+		<div class="hp-bar-red">
+			<div class="hp-value">Uploading...</div>
+			<div id="progress-bar" class="hp-bar-green"></div>
+		</div>
 	</div>
 </div>
