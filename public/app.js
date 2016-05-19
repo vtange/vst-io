@@ -3,8 +3,9 @@ var _ = {
 	getInteractables : function(){
 		_.page = document.querySelector("html");
 		_.uploadbtn = document.getElementById('upload-btn');
-		_.fileupload = document.getElementById('fileUpload');
+		_.fileupload = document.getElementById('file-upload');
 		_.dropzone = document.getElementById('drop-zone');
+		_.progressbar = document.getElementById('progress-bar');
 	},
 
 	initEvents : function(){
@@ -78,9 +79,27 @@ var _ = {
 					var formData = new FormData();
 
 					// HTML file input, chosen by user
-					formData.append("userfile", $("#fileUpload")[0].files[0]);
+					formData.append("userfile", $("#file-upload")[0].files[0]);
+
+					// create request
 					var request = new XMLHttpRequest();
 					request.open("POST", window.location.href);
+
+					// setup request
+					request.upload.onprogress = function(e) {
+					  if (e.lengthComputable) {
+						var percentage = (e.loaded / e.total) * 100;
+						$('div.progress div.bar').css('width', percentage + '%');
+					  }
+					};
+					request.onerror = function(e) {
+					  showInfo('An error occurred while submitting the form. Maybe your file is too big');
+					};
+					request.onload = function() {
+					  showInfo(this.statusText);
+					};
+
+					//send request
 					request.send(formData);
 				
             } else {
@@ -89,6 +108,11 @@ var _ = {
         } else {
             alert("Please upload a valid CSV file.");
         }
+	},
+	showInfo: function(message) {
+		$('div.progress').hide();
+		$('strong.message').text(message);
+		$('div.alert').show();
 	}
 
 }
