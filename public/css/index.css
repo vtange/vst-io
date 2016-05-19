@@ -15,27 +15,27 @@ body {
 }
 /* overall background color */
 body:after{
-  content: "";
-  position: fixed;
-  top: 0; 
-  left: 0;
-  width: 100%; 
-  height: 100%;
-  z-index: -11;
-  background-color:rgba(0,0,0,0.0);
+	content: "";
+	position: fixed;
+	top: 0; 
+	left: 0;
+	width: 100%; 
+	height: 100%;
+	z-index: -11;
+	background-color:rgba(0,0,0,0.0);
 }
 body, .btn, #header > #group1 > a{
-	color: #555;
+	color: rgba(77,87,97,1);
 }
 .vert-centered{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 .vert-menu{
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 /* BASICS ^ */
 /* RESET */
@@ -96,6 +96,70 @@ body, .btn, #header > #group1 > a{
 #upload-btn{
 	margin: 0 auto;
 	display:block
+}
+/*------------*/
+/* CUSTOM FILE UPLOAD */
+/*--------------*/
+input[type="file"] {
+	display: none;
+}
+
+/* style 5 */
+
+.inputfile-5 + label figure {
+    width: 15rem;
+    height: 18rem;
+    background-color: #d3394c;
+    display: block;
+    position: relative;
+    padding: 30px;
+    margin: 0 auto 3rem;
+}
+
+.inputfile-5:focus + label figure,
+.inputfile-5.has-focus + label figure,
+.inputfile-5 + label:hover figure,
+.inputfile-5 + label:hover span {
+    background-color: #722040;
+}
+
+.inputfile-5 + label figure::before,
+.inputfile-5 + label figure::after {
+    width: 0;
+    height: 0;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.inputfile-5 + label figure::before {
+    border-top: 3rem solid #fff;
+    border-left: 3rem solid transparent;
+}
+
+.inputfile-5 + label figure::after {
+    border-bottom: 3rem solid #722040;
+    border-right: 3rem solid transparent;
+}
+
+.inputfile-5:focus + label figure::after,
+.inputfile-5.has-focus + label figure::after,
+.inputfile-5 + label:hover figure::after {
+    border-bottom-color: #d3394c;
+}
+
+.inputfile-5 + label svg {
+    width: 100%;
+    height: 100%;
+    fill: #f1e5e6;
+}
+
+.inputfile-5 + label > span{
+	padding: 1rem;
+	font-size: 2rem;
+    color: #fff;
+    background-color: #d3394c;
 }
 /*------------*/
 /* CUSTOM DROPDOWN */
@@ -175,38 +239,34 @@ body, .btn, #header > #group1 > a{
 /*------------*/
 /* FOOTER */
 /*--------------*/
+#footer{
+	position: fixed;
+	bottom: 0;
+	width:80%;
+	margin-left: 10%;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+}
 .tab-menu-container{
-  position:relative;
-  padding: 0px 15px 15px 15px;
+	position:relative;
 }
 .tab-menu{
-  width: 90%;
-	margin: auto;
-  border: 2px solid rgba(205,0,0,1);
-  border-radius: 20px;
-  overflow:hidden;
+	overflow:hidden;
 
-  display: flex;
-  flex-direction: row;
+	display: flex;
+	flex-direction: row;
 }
 
 .tab-menu li{
-  display: inline-block; 	/* remove li dot */
-  font-family: "Arial Rounded MT Bold", "Arial";
-  text-align: center;
-  color: rgba(205,0,0,1);
-  text-transform: uppercase;
-  font-weight: 700;
-  
-  width:50%;
-	
-  padding:8px;
-  cursor:pointer;
-}
-.tab-menu li:hover{
-  text-decoration: underline;
+	display: inline-block; 	/* remove li dot */
+	font-family: "Arial Rounded MT Bold", "Arial";
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: 700;
+
+	width:33%;
+
+	padding:8px;
 }
 .tab-menu li.active{
-  color: white;
-  background-color:rgba(205,0,0,1);
 }
