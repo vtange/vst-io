@@ -80,26 +80,19 @@ body, .btn, #header > #group1 > a{
 /* FILE UPLOAD AREA */
 /*--------------*/
 .drop-zone {
-    text-align: center;
-	width:100%;
-	height:80vh;
+	height:90vh;
 	background-color: transparent;
 }
-#drop-zone {
-	color:black;
-    border: 1.8em dashed black;
-	border-radius: 3.6em;
+#drop-zone, #setter, #worker {
+	min-width:100vw;
 	position: relative;
 }
 
+/* drop hover */
 #drop-zone.onTop {border-color: white;}
 
-#upload-btn{
-	margin: 0 auto;
-	display:block
-}
 /* Right Arrow */
-.wrapper-dropdown:after {
+#drop-zone:after {
     content: "";
     width: 0;
     height: 0;
@@ -107,9 +100,21 @@ body, .btn, #header > #group1 > a{
     right: 16px;
     top: 50%;
     margin-top: -6px;
-    border-width: 6px 6px 0 6px;
+    border-width: 16px 0 16px 16px;
     border-style: solid;
-    border-color: #654b26 transparent;    
+    border-color: transparent #654b26;    
+}
+#setter:before{
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    margin-top: -6px;
+    border-width: 16px 16px 16px 0;
+    border-style: solid;
+    border-color: transparent #654b26;    
 }
 /*------------*/
 /* CUSTOM FILE UPLOAD */
@@ -135,6 +140,7 @@ input[type="file"] {
 .inputfile-5 + label:hover figure,
 .inputfile-5 + label:hover span {
     background-color: #722040;
+	cursor: pointer;
 }
 
 .inputfile-5 + label figure::before,
