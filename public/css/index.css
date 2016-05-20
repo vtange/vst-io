@@ -77,8 +77,15 @@ body, .btn, #header > #group1 > a{
 	margin-bottom: 10px;
 }
 /*------------*/
-/* FILE UPLOAD AREA */
+/* WORKFLOW AREA */
 /*--------------*/
+#viewer{
+	overflow:hidden;
+}
+#workflow{
+	transition: translate 0.5s ease;
+	transform: translateX(-0%);
+}
 .drop-zone {
 	height:90vh;
 	background-color: transparent;
@@ -271,8 +278,6 @@ input[type="file"] {
 	position:relative;
 }
 .tab-menu, #workflow{
-	overflow:hidden;
-
 	display: flex;
 	flex-direction: row;
 }
@@ -285,8 +290,5 @@ input[type="file"] {
 	font-weight: 700;
 
 	width:33%;
-
-	padding:8px;
-}
-.tab-menu li.active{
+	padding:1rem;
 }
