@@ -2,13 +2,11 @@ var _ = {
 	//used to check file extension
 	validFiles : /^([a-zA-Z0-9\s_\\.\-:\(\)])+(.wav|.mp3|.ogg|.flac|.wma)$/,
 	
-	//used to check where user is on workflow
-	state : { workflow : 1 },
-	
 	//[init at DOM load] gets HTML elements for targeting
 	getInteractables : function(){
 		_.page = document.querySelector("html");
 		_.workflow = document.getElementById("workflow");
+		_.placemarker = document.getElementById("place-marker");
 		_.uploadbtn = document.getElementById('upload-btn');
 		_.fileupload = document.getElementById('file-upload');
 		_.filelabel = document.getElementById('file-upload').nextElementSibling;
@@ -21,28 +19,24 @@ var _ = {
 
 	//[init after getInteractables] assigns events
 	initEvents : function(){
-		////////////////  OBJECT-WATCH state
-		_.state.watch("workflow", function () {
-			if(this.workflow===1){
-				_.workflow.style.webkitTransform = 'translateX(-'+0+'%)';
-				_.workflow.style.mozTransform    = 'translateX(-'+0+'%)';
-				_.workflow.style.transform       = 'translateX(-'+0+'%)';
-			}
-			else{
+		////////////////  next cycles forward
+		_.next.addEventListener("click", function () {
 				_.workflow.style.webkitTransform = 'translateX(-'+100+'%)';
 				_.workflow.style.mozTransform    = 'translateX(-'+100+'%)';
 				_.workflow.style.transform       = 'translateX(-'+100+'%)';
-			}
-		});
-
-		////////////////  next cycles forward
-		_.next.addEventListener("click", function () {
-			_.cycleWorkflow();
+				_.placemarker.style.webkitTransform = 'translateX('+100+'%)';
+				_.placemarker.style.mozTransform    = 'translateX('+100+'%)';
+				_.placemarker.style.transform       = 'translateX('+100+'%)';
 		});
 
 		////////////////  back cycles backward
 		_.back.addEventListener("click", function () {
-			_.cycleWorkflow();
+				_.workflow.style.webkitTransform = 'translateX(-'+0+'%)';
+				_.workflow.style.mozTransform    = 'translateX(-'+0+'%)';
+				_.workflow.style.transform       = 'translateX(-'+0+'%)';
+				_.placemarker.style.webkitTransform = 'translateX('+0+'%)';
+				_.placemarker.style.mozTransform    = 'translateX('+0+'%)';
+				_.placemarker.style.transform       = 'translateX('+0+'%)';
 		});
 
 		////////////////  sends selected file
@@ -148,9 +142,6 @@ var _ = {
         } else {
             alert("One or more of your files is not a valid audio file.");
         }
-	},
-	cycleWorkflow: function() {
-		_.state.workflow = _.state.workflow === 1 ? 2 : 1;
 	},
 	showInfo: function(message) {
 		//leftover Jquery
