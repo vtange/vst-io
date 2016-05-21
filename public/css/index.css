@@ -98,30 +98,57 @@ body, .btn, #header > #group1 > a{
 /* drop hover */
 #drop-zone.onTop {border-color: white;}
 
-/* Right Arrow */
-#drop-zone:after {
-    content: "";
-    width: 0;
-    height: 0;
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    margin-top: -6px;
-    border-width: 16px 0 16px 16px;
-    border-style: solid;
-    border-color: transparent #654b26;    
+#next-btn, #back-btn {
+	position: absolute;
+	top:50%;
+	display:inline-block;
+	padding-top: 0.6rem;
+	padding-bottom: 0.6rem;
+	
+	font-size: 2rem;
+	color:white;
+	background-color: #d3394c;
+	box-shadow: -2px 3px 3px rgba(0,0,0,0.2);
+	
+	cursor: pointer;
 }
-#setter:before{
+#next-btn {
+	right: 5rem;
+	padding-left: 1.6rem;
+	padding-right: 0;
+}
+#back-btn {
+	left: 5rem;
+	padding-left: 0;
+	padding-right: 1.6rem;
+}
+
+/* Arrows */
+#next-btn:after, #back-btn:after  {
     content: "";
     width: 0;
     height: 0;
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    margin-top: -6px;
-    border-width: 16px 16px 16px 0;
+	position: absolute;
+	margin-top: -0.6rem;
+}
+/* Right Arrow */
+#next-btn:after {
+    border-width: 2rem 0 2rem 2rem;
     border-style: solid;
-    border-color: transparent #654b26;    
+    border-color: transparent #d3394c;    
+}
+/* Left Arrow */
+#back-btn:after {
+    border-width: 2rem 2rem 2rem 0;
+    border-style: solid;
+    border-color: transparent #d3394c;    
+}
+
+#next-btn:hover, #back-btn:hover {
+    background-color: #722040;
+}
+#next-btn:hover:after, #back-btn:hover:after{
+	border-color: transparent #722040;
 }
 /*------------*/
 /* CUSTOM FILE UPLOAD */
@@ -140,6 +167,7 @@ input[type="file"] {
     position: relative;
     padding: 30px;
     margin: 0 auto 3rem;
+	box-shadow: -2px 3px 3px rgba(0,0,0,0.2);
 }
 
 .inputfile-5:focus + label figure,
@@ -187,6 +215,7 @@ input[type="file"] {
 	font-size: 2rem;
     color: #fff;
     background-color: #d3394c;
+	box-shadow: -2px 3px 3px rgba(0,0,0,0.2);
 }
 /*------------*/
 /* CUSTOM DROPDOWN */
