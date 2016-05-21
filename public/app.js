@@ -1,5 +1,5 @@
 var _ = {
-
+	validFiles : /^([a-zA-Z0-9\s_\\.\-:\(\)])+(.wav|.mp3|.ogg|.flac|.wma)$/,
 	getInteractables : function(){
 		_.page = document.querySelector("html");
 		_.uploadbtn = document.getElementById('upload-btn');
@@ -14,7 +14,7 @@ var _ = {
 
 		////////////////  sends selected file
 		_.uploadbtn.addEventListener("click", function () {
-			_.uploadedFileCheck();
+			_.sendFiles();
 		}),
 
 		////////////////  drag and drop
@@ -52,14 +52,14 @@ var _ = {
 			_.processDropped(e, 1)
 		}, false);
 		
-		////////////////  assign custom input
+		//////////////// default file add
 		_.fileupload.addEventListener( 'change', function( e )
 		{
-			var fileName = '';
+			var fileName = '';/* prevent multi file upload for now
 			if( this.files && this.files.length > 1 )
 				fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
-			else
-				fileName = e.target.value.split( '\\' ).pop();
+			else*/
+				fileName = this.files[0].name;
 
 			if( fileName )
 				_.filelabel.querySelector( 'span' ).innerHTML = fileName;
@@ -71,63 +71,51 @@ var _ = {
 		_.fileupload.addEventListener( 'focus', function(){ input.classList.add( 'has-focus' ); });
 		_.fileupload.addEventListener( 'blur', function(){ input.classList.remove( 'has-focus' ); });
 	},
-
+	//////////////// drag n drop file add
 	processDropped : function(eventTarget){
-        // let's just work with one file
         var file = eventTarget.dataTransfer.files[0];
-        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.wav|.mp3|.ogg|.flac|.wma)$/;
-        //console.log("Type: " + file.type);                        for debug use
-        //console.log(regex.test(file.name.toLowerCase()));
-        if (regex.test(file.name.toLowerCase())) {
-				//PREPARE DATA AND SEND
-					var formData = new FormData();
-
-					// HTML file input, chosen by user
-					formData.append("userfile", file);
-					var request = new XMLHttpRequest();
-					request.open("POST", window.location.href);
-					request.send(formData);
-        } else {
-        alert("Please upload a valid CSV file.");
+        if (_.validFiles.test(file.name.toLowerCase())) {
+			_.filelabel.querySelector( 'span' ).innerHTML = file.name;
+			_.fileupload.files[0] = file;
+        } 
+		else {
+			alert("One or more of your files is not a valid audio file.");
         }
 	},
-	uploadedFileCheck : function(){
-		var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.wav|.mp3|.ogg|.flac|.wma)$/;
-        if (regex.test(_.fileupload.value.toLowerCase())) {
+	sendFiles : function(){
+        if (_.validFiles.test(_.fileupload.files[0].name.toLowerCase())) {
             if (typeof (FileReader) != "undefined") {
-				
 				//PREPARE DATA AND SEND
-					var formData = new FormData();
+				var formData = new FormData();
 
-					// HTML file input, chosen by user
-					formData.append("userfile", $("#file-upload")[0].files[0]);
+				// HTML file input, chosen by user
+				formData.append("userfile", _.fileupload.files[0]);
 
-					// create request
-					var request = new XMLHttpRequest();
-					request.open("POST", window.location.href);
+				// create request
+				var request = new XMLHttpRequest();
+				request.open("POST", window.location.href);
 
-					// setup request
-					request.upload.onprogress = function(e) {
-					  if (e.lengthComputable) {
-						var percentage = (e.loaded / e.total) * 100;
-						$('div.progress div.bar').css('width', percentage + '%');
-					  }
-					};
-					request.onerror = function(e) {
-					  showInfo('An error occurred while submitting the form. Maybe your file is too big');
-					};
-					request.onload = function() {
-					  showInfo(this.statusText);
-					};
+				// setup request
+				request.upload.onprogress = function(e) {
+				  if (e.lengthComputable) {
+					var percentage = (e.loaded / e.total) * 100;
+					_.progressbar.style.width = percentage + '%';
+				  }
+				};
+				request.onerror = function(e) {
+				  showInfo('An error occurred while submitting the form. Maybe your file is too big');
+				};
+				request.onload = function() {
+				  showInfo(this.statusText);
+				};
 
-					//send request
-					request.send(formData);
-				
+				//send request
+				request.send(formData);
             } else {
                 alert("This browser does not support HTML5.");
             }
         } else {
-            alert("Please upload a valid CSV file.");
+            alert("One or more of your files is not a valid audio file.");
         }
 	},
 	showInfo: function(message) {
