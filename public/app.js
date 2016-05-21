@@ -4,6 +4,8 @@ var _ = {
 		_.page = document.querySelector("html");
 		_.uploadbtn = document.getElementById('upload-btn');
 		_.fileupload = document.getElementById('file-upload');
+		_.filelabel = document.getElementById('file-upload').nextElementSibling;
+		_.filename = _.filelabel.innerHTML;
 		_.dropzone = document.getElementById('drop-zone');
 		_.progressbar = document.getElementById('progress-bar');
 	},
@@ -50,31 +52,24 @@ var _ = {
 			_.processDropped(e, 1)
 		}, false);
 		
-		////////////////  assign custom inputs
-		var inputs = document.querySelectorAll( '.inputfile' );
-		Array.prototype.forEach.call( inputs, function( input )
+		////////////////  assign custom input
+		_.fileupload.addEventListener( 'change', function( e )
 		{
-			var label	 = input.nextElementSibling,
-				labelVal = label.innerHTML;
+			var fileName = '';
+			if( this.files && this.files.length > 1 )
+				fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+			else
+				fileName = e.target.value.split( '\\' ).pop();
 
-			input.addEventListener( 'change', function( e )
-			{
-				var fileName = '';
-				if( this.files && this.files.length > 1 )
-					fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
-				else
-					fileName = e.target.value.split( '\\' ).pop();
-
-				if( fileName )
-					label.querySelector( 'span' ).innerHTML = fileName;
-				else
-					label.innerHTML = labelVal;
-			});
-
-			// Firefox bug fix
-			input.addEventListener( 'focus', function(){ input.classList.add( 'has-focus' ); });
-			input.addEventListener( 'blur', function(){ input.classList.remove( 'has-focus' ); });
+			if( fileName )
+				_.filelabel.querySelector( 'span' ).innerHTML = fileName;
+			else
+				_.filelabel.innerHTML = _.filename;
 		});
+
+		// Firefox bug fix
+		_.fileupload.addEventListener( 'focus', function(){ input.classList.add( 'has-focus' ); });
+		_.fileupload.addEventListener( 'blur', function(){ input.classList.remove( 'has-focus' ); });
 	},
 
 	processDropped : function(eventTarget){
