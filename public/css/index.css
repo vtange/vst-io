@@ -7,10 +7,10 @@ a{
 /* background image */
 body {
     margin: 0;/*reset page*/
-	background-image: none;
+	background-image: url("./img/diam.jpg");
 	background-repeat: repeat;
-	background-position: top;
-	background-size: 30%;
+	background-position: center;
+	background-size: 30rem;
     z-index: -10;
 }
 /* overall background color */
@@ -22,10 +22,10 @@ body:after{
 	width: 100%; 
 	height: 100%;
 	z-index: -11;
-	background-color:rgba(0,0,0,0.0);
+	background-color:rgba(217,217,217,0.3);
 }
 body, .btn, #header > #group1 > a{
-	color: rgba(77,87,97,1);
+	color: rgba(97,87,77,1);
 }
 .vert-centered{
 	position: absolute;
@@ -189,7 +189,7 @@ input[type="file"] {
 }
 
 .inputfile-5 + label figure::before {
-    border-top: 3rem solid #fff;
+    border-top: 3rem solid #dbdbdb;
     border-left: 3rem solid transparent;
 }
 
