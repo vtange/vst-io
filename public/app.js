@@ -33,7 +33,6 @@ var _ = {
 				_.dropzone.classList.remove("onTop")
 			}
 		});
-
 		_.dropzone.addEventListener("dragover", function(e) {
 			e.preventDefault();
 			e.stopPropagation();
@@ -42,7 +41,6 @@ var _ = {
 			}
 			e.dataTransfer.dropEffect = "copy";//mouse icon
 		}, false);
-
 		_.dropzone.addEventListener("drop", function(e) {
 			e.preventDefault();
 			e.stopPropagation();

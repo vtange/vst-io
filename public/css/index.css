@@ -82,8 +82,8 @@ body, .btn, #header > #group1 > a {
 #viewer {
 	overflow:hidden;
 }
-#workflow {
-	transition: translate 0.5s ease;
+#workflow, #place-marker{
+	transition: all 0.5s ease;
 	transform: translateX(-0%);
 }
 
@@ -311,10 +311,21 @@ input[type="file"] {
 	bottom: 0;
 	width:80%;
 	margin-left: 10%;
+}
+#footer, #place-marker {
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;
 	border-bottom-left-radius: 4px;
 	border-bottom-right-radius: 4px;
+}
+#place-marker {
+	position: absolute;
+	display: inline-block;
+	height: 100%;
+	width:33%;
+	border: 1px solid #f97bf2;
+	border-bottom-width: 2px;
+	box-shadow: 0px 0px 10px #f97bf2;
 }
 .tab-menu-container {
 	position:relative;
