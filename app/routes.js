@@ -1,6 +1,6 @@
 var multer  = require('multer');
 var storage = multer.memoryStorage();
-var upload = multer({ storage: storage, dest: './tmp/'});
+var upload = multer({ storage: storage, dest: '/workspace/'});
 var Promise = require('bluebird');
 
 // Workspace directory PATH (string)
@@ -69,7 +69,10 @@ function VSTprocess(fn, fileName, outputName){
 }
 
 var uploadFile = function(req, res) {
-	var file = req.files.userfile;
+	var file = req.files.audiofiles;
+	console.log(file);
+	console.log(req.files);
+	/*
 	file.mv(workspace_dir + file.name, function(err) {
 		if (err) {
 			console.log(err);
@@ -94,7 +97,7 @@ var uploadFile = function(req, res) {
 				console.log("something went wrong in conversion mode");
 			});
 		}
-	});
+	});*/
 };
 
 // app/routes.js
@@ -113,5 +116,6 @@ module.exports = function(app) {
  	// =====================================
     // UPLOAD ========
     // =====================================
-	app.post('/',upload.single('userfile'), uploadFile);	//.single('userfile') must match name of file in app.js -> formData.append("userfile",
+	var package = upload.fields([{ name: 'audiofiles', maxCount: 1 }, { name: 'vsts', maxCount: 1 }])
+	app.post('/',upload.single('audiofiles'), uploadFile);	//.single('userfile') must match name of file in app.js -> formData.append("userfile",
 };

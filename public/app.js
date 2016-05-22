@@ -125,17 +125,19 @@ var _ = {
 	sendFiles : function(){
         if (_.validFiles.test(_.fileupload.files[0].name.toLowerCase())) {
             if (typeof (FileReader) != "undefined") {
-				//PREPARE DATA AND SEND
+				////PREPARE DATA AND SEND
 				var formData = new FormData();
+				
+				//// HTML file input, chosen by user
+				formData.append("audiofiles", _.fileupload.files[0]);
+				formData.append("vsts", _.dropdown.querySelector( 'span' ).innerHTML);
 
-				// HTML file input, chosen by user
-				formData.append("userfile", _.fileupload.files[0]);
-
-				// create request
+				//// create request
 				var request = new XMLHttpRequest();
 				request.open("POST", window.location.href);
-
-				// setup request
+				
+				//// setup request
+				//enable upload progress
 				request.upload.onprogress = function(e) {
 				  if (e.lengthComputable) {
 					var percentage = (e.loaded / e.total) * 100;

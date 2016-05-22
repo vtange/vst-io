@@ -159,7 +159,7 @@ body, .btn, #header > #group1 > a {
     border-color: transparent #d3394c;    
 }
 
-#next-btn:hover, #back-btn:hover {
+#next-btn:hover, #back-btn:hover, #upload-btn:hover {
     background-color: #722040;
 }
 #next-btn:hover:after, #back-btn:hover:before {
@@ -169,6 +169,7 @@ body, .btn, #header > #group1 > a {
 	right: 5rem;
 	padding-right: 1.6rem;
 	padding-left: 1.6rem;
+	border: 0px;
 }
 
 /*------------*/
