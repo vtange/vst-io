@@ -244,6 +244,9 @@ input[type="file"] {
 /*------------*/
 /* CUSTOM DROPDOWN */
 /*--------------*/
+.hidden {
+	display: none;
+}
 .wrapper-dropdown, .dropdown {
     /* Size and position */
     position: relative; /* Enable absolute positioning for children and pseudo elements */
@@ -275,17 +278,16 @@ input[type="file"] {
 }
 /* The Actual List */
 .dropdown {
-    position: absolute;
     z-index: 10;
 }
 .dropdown li {
     display: block;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
-    border-bottom: 2px dotted #654b26;
+    border-bottom: 2px dotted lightcoral;
 }
 .dropdown li:hover {
-    border-bottom: 2px solid #654b26;
+    border-bottom: 2px solid lightcoral;
 }
 /*------------*/
 /* FILE UPLOAD BAR */

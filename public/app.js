@@ -7,14 +7,19 @@ var _ = {
 		_.page = document.querySelector("html");
 		_.workflow = document.getElementById("workflow");
 		_.placemarker = document.getElementById("place-marker");
-		_.uploadbtn = document.getElementById('upload-btn');
+
 		_.fileupload = document.getElementById('file-upload');
 		_.filelabel = document.getElementById('file-upload').nextElementSibling;
 		_.filename = _.filelabel.innerHTML;
+
 		_.dropzone = document.getElementById('drop-zone');
-		_.progressbar = document.getElementById('progress-bar');
+		_.dropdown = document.getElementById('dropdown');
+		_.list = document.getElementById('effects');
+
 		_.next = document.getElementById('next-btn');
 		_.back = document.getElementById('back-btn');
+		_.uploadbtn = document.getElementById('upload-btn');
+		_.progressbar = document.getElementById('progress-bar');
 	},
 
 	//[init after getInteractables] assigns events
@@ -37,6 +42,16 @@ var _ = {
 				_.placemarker.style.webkitTransform = 'translateX('+0+'%)';
 				_.placemarker.style.mozTransform    = 'translateX('+0+'%)';
 				_.placemarker.style.transform       = 'translateX('+0+'%)';
+		});
+
+		////////////////  show effects list
+		_.dropdown.addEventListener("click", function () {
+			if (_.list.classList.contains("hidden")) {
+				_.list.classList.remove("hidden");
+			}
+			else{
+				_.list.classList.add("hidden");
+			}
 		});
 
 		////////////////  sends selected file
