@@ -308,7 +308,7 @@ input[type="file"] {
     position: absolute;
     content:"";
     top:0;
-    right:0;
+    left:0;
     background-color:lightgreen;
     border-radius: 10px;
     height:100%;
@@ -329,7 +329,7 @@ input[type="file"] {
 	width:80%;
 	margin-left: 10%;
 }
-#footer, #place-marker {
+#footer {
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;
 	border-bottom-left-radius: 4px;
@@ -339,10 +339,12 @@ input[type="file"] {
 	position: absolute;
 	display: inline-block;
 	height: 100%;
-	width:33%;
-	border: 1px solid #f97bf2;
-	border-bottom-width: 2px;
-	box-shadow: 0px 0px 10px #f97bf2;
+	border-bottom: 0.6rem solid #f97bf2;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+#place-marker, .tab-menu li {
+	width: calc(100%  /3);
 }
 .tab-menu-container {
 	position:relative;
@@ -367,6 +369,5 @@ input[type="file"] {
 	text-transform: uppercase;
 	font-weight: 700;
 
-	width:33%;
 	padding:1rem;
 }

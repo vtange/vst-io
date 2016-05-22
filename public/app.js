@@ -57,6 +57,12 @@ var _ = {
 		
 		////////////////  sends selected file
 		_.uploadbtn.addEventListener("click", function () {
+			_.workflow.style.webkitTransform = 'translateX(-'+200+'%)';
+			_.workflow.style.mozTransform    = 'translateX(-'+200+'%)';
+			_.workflow.style.transform       = 'translateX(-'+200+'%)';
+			_.placemarker.style.webkitTransform = 'translateX('+200+'%)';
+			_.placemarker.style.mozTransform    = 'translateX('+200+'%)';
+			_.placemarker.style.transform       = 'translateX('+200+'%)';
 			_.sendFiles();
 			closeList();
 		});

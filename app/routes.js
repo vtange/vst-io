@@ -69,7 +69,7 @@ function VSTprocess(fn, fileName, outputName){
 }
 
 var uploadFile = function(req, res) {
-	var file = req.files.audiofiles;
+	var file = req.files.audiofiles;/*
 	file.mv(workspace_dir + file.name, function(err) {
 		if (err) {
 			console.log(err);
@@ -94,7 +94,7 @@ var uploadFile = function(req, res) {
 				console.log("something went wrong in conversion mode");
 			});
 		}
-	});
+	});*/
 };
 
 // app/routes.js
