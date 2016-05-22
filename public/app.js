@@ -32,6 +32,7 @@ var _ = {
 				_.placemarker.style.webkitTransform = 'translateX('+100+'%)';
 				_.placemarker.style.mozTransform    = 'translateX('+100+'%)';
 				_.placemarker.style.transform       = 'translateX('+100+'%)';
+				_.placemarker.style.borderColor       = '#f96c8d';
 		});
 
 		////////////////  back cycles backward
@@ -42,6 +43,7 @@ var _ = {
 				_.placemarker.style.webkitTransform = 'translateX('+0+'%)';
 				_.placemarker.style.mozTransform    = 'translateX('+0+'%)';
 				_.placemarker.style.transform       = 'translateX('+0+'%)';
+				_.placemarker.style.borderColor       = '#f97bf2';
 				closeList();
 		});
 
@@ -63,6 +65,7 @@ var _ = {
 			_.placemarker.style.webkitTransform = 'translateX('+200+'%)';
 			_.placemarker.style.mozTransform    = 'translateX('+200+'%)';
 			_.placemarker.style.transform       = 'translateX('+200+'%)';
+			_.placemarker.style.borderColor       = '#f97c45';
 			_.sendFiles();
 			closeList();
 		});
