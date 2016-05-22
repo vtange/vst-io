@@ -57,7 +57,7 @@ var _ = {
 		
 		////////////////  sends selected file
 		_.uploadbtn.addEventListener("click", function () {
-			_.sendFiles();
+			//_.sendFiles();
 			closeList();
 		});
 
@@ -125,6 +125,7 @@ var _ = {
 			alert("One or more of your files is not a valid audio file.");
         }
 	},
+	/*
 	sendFiles : function(){
         if (_.validFiles.test(_.fileupload.files[0].name.toLowerCase())) {
             if (typeof (FileReader) != "undefined") {
@@ -163,6 +164,7 @@ var _ = {
             alert("One or more of your files is not a valid audio file.");
         }
 	},
+	*/
 	showInfo: function(message) {
 		//leftover Jquery
 		$('div.progress').hide();
