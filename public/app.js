@@ -45,15 +45,14 @@ var _ = {
 		});
 
 		////////////////  show effects list
-		_.dropdown.addEventListener("click", function () {
-			if (_.list.classList.contains("hidden")) {
-				_.list.classList.remove("hidden");
-			}
-			else{
-				_.list.classList.add("hidden");
-			}
+		_.dropdown.addEventListener("click", toggleList);
+		
+		on('effects', 'click', 'li', function(e) {
+			_.dropdown.querySelector( 'span' ).innerHTML = e.target.innerHTML; // this is the clicked list item
+			toggleList();
 		});
-
+		
+		
 		////////////////  sends selected file
 		_.uploadbtn.addEventListener("click", function () {
 			_.sendFiles();
@@ -171,3 +170,34 @@ var _ = {
 	 _.getInteractables();
 	 _.initEvents();
  });
+
+function on(elSelector, eventName, selector, fn) {
+	var element = document.getElementById(elSelector);
+
+	element.addEventListener(eventName, function(event) {
+		var possibleTargets = element.querySelectorAll(selector);
+		var target = event.target;
+
+		for (var i = 0, l = possibleTargets.length; i < l; i++) {
+			var el = target;
+			var p = possibleTargets[i];
+
+			while(el && el !== element) {
+				if (el === p) {
+					return fn.call(p, event);
+				}
+
+				el = el.parentNode;
+			}
+		}
+	});
+}
+
+function toggleList() {
+	if (_.list.classList.contains("hidden")) {
+		_.list.classList.remove("hidden");
+	}
+	else{
+		_.list.classList.add("hidden");
+	}
+}
