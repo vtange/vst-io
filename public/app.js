@@ -42,12 +42,14 @@ var _ = {
 				_.placemarker.style.webkitTransform = 'translateX('+0+'%)';
 				_.placemarker.style.mozTransform    = 'translateX('+0+'%)';
 				_.placemarker.style.transform       = 'translateX('+0+'%)';
+				closeList();
 		});
 
 		////////////////  show effects list
 		_.dropdown.addEventListener("click", toggleList);
 		
 		on('effects', 'click', 'li', function(e) {
+			_.dropdown.querySelector( 'input' ).value = e.target.innerHTML;
 			_.dropdown.querySelector( 'span' ).innerHTML = e.target.innerHTML; // this is the clicked list item
 			toggleList();
 		});
@@ -56,6 +58,7 @@ var _ = {
 		////////////////  sends selected file
 		_.uploadbtn.addEventListener("click", function () {
 			_.sendFiles();
+			closeList();
 		});
 
 		////////////////  drag and drop
@@ -137,6 +140,7 @@ var _ = {
 				request.open("POST", window.location.href);
 				
 				//// setup request
+				//request.setRequestHeader('Content-Type', 'multipart/form-data');
 				//enable upload progress
 				request.upload.onprogress = function(e) {
 				  if (e.lengthComputable) {
@@ -196,10 +200,16 @@ function on(elSelector, eventName, selector, fn) {
 }
 
 function toggleList() {
-	if (_.list.classList.contains("hidden")) {
-		_.list.classList.remove("hidden");
+	if (!_.list.classList.contains("hidden")) {
+		_.list.classList.add("hidden");
 	}
 	else{
+		_.list.classList.remove("hidden");
+	}
+}
+
+function closeList() {
+	if (!_.list.classList.contains("hidden")) {
 		_.list.classList.add("hidden");
 	}
 }

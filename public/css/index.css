@@ -22,9 +22,12 @@ body:after {
 	width: 100%; 
 	height: 100%;
 	z-index: -11;
-	background-color:rgba(217,217,217,0.3);
+	background:rgba(217,217,217,0.2);
 }
-body, .btn, #header > #group1 > a {
+body, .btn {
+	color:#889499;
+}
+#header > #group1 > a {
 	color: rgba(247,207,127,1);
 }
 .vert-centered {
