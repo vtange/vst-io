@@ -59,6 +59,7 @@ var _ = {
 		
 		////////////////  sends selected file
 		_.uploadbtn.addEventListener("click", function () {
+			closeList();
 			_.workflow.style.webkitTransform = 'translateX(-'+200+'%)';
 			_.workflow.style.mozTransform    = 'translateX(-'+200+'%)';
 			_.workflow.style.transform       = 'translateX(-'+200+'%)';
@@ -67,7 +68,6 @@ var _ = {
 			_.placemarker.style.transform       = 'translateX('+200+'%)';
 			_.placemarker.style.borderColor       = '#f97c45';
 			_.sendFiles();
-			closeList();
 		});
 
 		////////////////  drag and drop
