@@ -57,7 +57,7 @@ var _ = {
 		
 		////////////////  sends selected file
 		_.uploadbtn.addEventListener("click", function () {
-			//_.sendFiles();
+			_.sendFiles();
 			closeList();
 		});
 
@@ -120,12 +120,11 @@ var _ = {
         if (_.validFiles.test(file.name.toLowerCase())) {
 			_.filelabel.querySelector( 'span' ).innerHTML = file.name;
 			_.fileupload.files[0] = file;
-        } 
+        }
 		else {
 			alert("One or more of your files is not a valid audio file.");
         }
 	},
-	/*
 	sendFiles : function(){
         if (_.validFiles.test(_.fileupload.files[0].name.toLowerCase())) {
             if (typeof (FileReader) != "undefined") {
@@ -133,8 +132,8 @@ var _ = {
 				var formData = new FormData();
 				
 				//// HTML file input, chosen by user
+				formData.append("vsts", _.dropdown.querySelector( 'input' ).value);
 				formData.append("audiofiles", _.fileupload.files[0]);
-				formData.append("vsts", _.dropdown.querySelector( 'span' ).innerHTML);
 
 				//// create request
 				var request = new XMLHttpRequest();
@@ -164,7 +163,6 @@ var _ = {
             alert("One or more of your files is not a valid audio file.");
         }
 	},
-	*/
 	showInfo: function(message) {
 		//leftover Jquery
 		$('div.progress').hide();

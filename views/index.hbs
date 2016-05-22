@@ -1,6 +1,6 @@
 <!-- views/index.hbs -->
 <div id="viewer">
-	<form id="workflow" action="/" method="post" enctype="multipart/form-data">
+	<form id="workflow" action="/" method="post" enctype="multipart/form-data" onsubmit="return false">
 		<div id="drop-zone" class="drop-zone">
 			<div id="drop-box" class="vert-centered"></div>
 			<div class="box vert-centered">
@@ -22,7 +22,7 @@
 				<li>Louder</li>
 				<li>Less Hissy</li>
 			</ul>
-			<input type="submit" name="submit" id="upload-btn" value="Go!">
+			<input type="submit" id="upload-btn" value="Go!">
 		</div>
 		<div id="worker">
 			<div class="hp-bar-red">

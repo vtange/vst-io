@@ -69,8 +69,7 @@ function VSTprocess(fn, fileName, outputName){
 }
 
 var uploadFile = function(req, res) {
-	console.log(req.files);
-	console.log(req.file);
+	var file = req.files.audiofiles;
 	console.log(req.body);
 	/*
 	file.mv(workspace_dir + file.name, function(err) {
@@ -116,5 +115,5 @@ module.exports = function(app) {
  	// =====================================
     // UPLOAD ========
     // =====================================
-	app.post('/',upload.single('audiofiles'), uploadFile);	//.single('audiofiles') must match name of file in app.js -> formData.append("audiofiles",
+	app.post('/', uploadFile);
 };
