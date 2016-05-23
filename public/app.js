@@ -158,7 +158,7 @@ var _ = {
 					_.progressbar.style.width = percentage + '%';
 						if(!percentage<100){
 							//100% upload, begin processing.
-							_.progress.innerHTML = "Processing File&hellip;"
+							_.progress.innerHTML = "Processing&hellip;"
 						}
 				  }
 				};

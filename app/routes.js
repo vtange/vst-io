@@ -47,21 +47,45 @@ function toWav(fileName, outputName) {
 		command.run(reject, resolve);
 	});
 };
+
+function toMp3(fileName, outputName) {
+	return new Promise(function(resolve, reject) {
+		var command = SoxCommand();
+		command.input(fileName);
+		command.output(outputName)
+			.outputFileType('mp3');
+
+		addStandardListeners(command);
+		command.run(reject, resolve);
+	});
+};
+
 function deEss(fileName, outputName) {
 	return new Promise(function(resolve, reject) {
 		host.processAudio( fileName, outputName, [{name:vst_dir+"test_VST.dll", preset:vst_dir+"test_VST.fxp"}], resolve, reject);
 	});
 };
 
-function VSTprocess(fn, fileName, outputName){
+function Convert(fn, fileName, outputName){
+	console.log("begin final conversion");
+	fn(fileName,outputName)
+		.then(function(){
+			//send download link
+		})
+}
+
+function VSTprocess(fn, fileName, outputName, outputExt){
+	var fin_extens = toMp3;
+	console.log(fin_extens);
 	fn(fileName, outputName)
 		.then(function(){
-			//finished VST
-			console.log("VST processed :D");
+			//if outputExt is not wav
+			Convert(fin_extens, outputName, outputName.split('.').shift()+"."+outputExt);
+			//else, send download link
 		})
 		.catch(function(){
 			//broke VST
-			console.log("something went wrong in VSTmode");
+			console.log("something went wrong doing final conversion");
 		});
 }
 
@@ -77,18 +101,18 @@ var uploadFile = function(req, res) {
 			var vst = deEss;
 
 			//process
-			var fileName = file.name;
-			var outputName = fileName.slice(0,fileName.length-4);
+			var origExt = file.name.split('.').pop();
+			var outputWav = file.name.split('.').shift()+".wav";
 			//default processing (conv to WAV, process, output WAV)
-			toWav( workspace_dir + fileName, workspace_dir + outputName+'.wav' )
+			toWav( workspace_dir + file.name, workspace_dir + outputWav )
 			.then(function(){
 				//goodCB -> process with VST
-				VSTprocess(vst, workspace_dir + outputName+'.wav',  workspace_dir + '[tweak]'+outputName+'.wav');
+				VSTprocess(vst, workspace_dir + outputWav,  workspace_dir + "[tweak]"+outputWav, origExt);
 
 			})
 			.catch(function(){
 				//errCB -> "woops, couldn't process your file"
-				console.log("something went wrong in conversion mode");
+				console.log("something went wrong in processing your file");
 			});
 		}
 	});
