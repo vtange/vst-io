@@ -1,4 +1,5 @@
 var Promise = require('bluebird');
+var fs = require('fs');
 
 // Workspace directory PATH (string)
 var appRoot = require('app-root-path');
@@ -66,21 +67,41 @@ function deEss(fileName, outputName) {
 	});
 };
 
-function Convert(fn, fileName, outputName){
-	console.log("begin final conversion");
+
+
+
+
+function SendFile(file, res){
+
+	var stream = fs.createReadStream(file);
+
+	// Handle non-existent file
+	stream.on('error', function(error) {
+		res.writeHead(404, 'Not Found');
+		res.write('404: File Not Found!');
+		res.end();
+	});
+
+	// File exists, stream it to user
+	res.set({'Content-Type': 'audio/mpeg'});
+	res.statusCode = 200;
+	stream.pipe(res);
+}
+
+function Convert(fn, fileName, outputName, res){
 	fn(fileName,outputName)
 		.then(function(){
 			//send download link
-		})
+			SendFile(outputName,res);
+		});
 }
 
-function VSTprocess(fn, fileName, outputName, outputExt){
+function VSTprocess(fn, fileName, outputName, outputExt, res){
 	var fin_extens = toMp3;
-	console.log(fin_extens);
 	fn(fileName, outputName)
 		.then(function(){
 			//if outputExt is not wav
-			Convert(fin_extens, outputName, outputName.split('.').shift()+"."+outputExt);
+			Convert(fin_extens, outputName, outputName.split('.').shift()+"."+outputExt, res);
 			//else, send download link
 		})
 		.catch(function(){
@@ -107,7 +128,7 @@ var uploadFile = function(req, res) {
 			toWav( workspace_dir + file.name, workspace_dir + outputWav )
 			.then(function(){
 				//goodCB -> process with VST
-				VSTprocess(vst, workspace_dir + outputWav,  workspace_dir + "[tweak]"+outputWav, origExt);
+				VSTprocess(vst, workspace_dir + outputWav,  workspace_dir + "[tweak]"+outputWav, origExt, res);
 
 			})
 			.catch(function(){
