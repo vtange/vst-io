@@ -121,15 +121,22 @@ body, .btn {
 	padding-bottom: 0.6rem;
 	
 	font-size: 2rem;
-	color:#fff;
-	background-color: #d3394c;
 	
 	cursor: pointer;
 }
-#next-btn, #back-btn, #upload-btn, .hp-bar-red {
-	box-shadow: -2px 3px 3px rgba(0,0,0,0.2);
+#next-btn, #back-btn, #upload-btn, .btn, .btn-default {
+	background-color: #d3394c;
+	color:#fff;
 }
-#next-btn, #back-btn {
+.btn, .btn-default {
+	border-radius: 0px;
+	border: 0px;
+}
+.btn-default:hover{
+	color:#fff;
+}
+#next-btn, #back-btn, #upload-btn, .hp-bar-red, .btn, .btn-default  {
+	box-shadow: -2px 3px 3px rgba(0,0,0,0.2);
 }
 #next-btn {
 	right: 5rem;
@@ -164,7 +171,7 @@ body, .btn {
     border-color: transparent #d3394c;    
 }
 
-#next-btn:hover, #back-btn:hover, #upload-btn:hover {
+#next-btn:hover, #back-btn:hover, #upload-btn:hover, .btn:hover{
     background-color: #722040;
 }
 #next-btn:hover:after, #back-btn:hover:before {
