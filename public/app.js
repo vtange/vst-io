@@ -26,7 +26,7 @@ var _ = {
 	//[init after getInteractables] assigns events
 	initEvents : function(){
 		////////////////  next cycles forward
-		_.next.addEventListener("click", function () {
+		_.next.addEventListener("click", function (e) {
 				_.workflow.style.webkitTransform = 'translateX(-'+100+'%)';
 				_.workflow.style.mozTransform    = 'translateX(-'+100+'%)';
 				_.workflow.style.transform       = 'translateX(-'+100+'%)';
@@ -37,7 +37,7 @@ var _ = {
 		});
 
 		////////////////  back cycles backward
-		_.back.addEventListener("click", function () {
+		_.back.addEventListener("click", function (e) {
 				_.workflow.style.webkitTransform = 'translateX(-'+0+'%)';
 				_.workflow.style.mozTransform    = 'translateX(-'+0+'%)';
 				_.workflow.style.transform       = 'translateX(-'+0+'%)';
@@ -45,22 +45,24 @@ var _ = {
 				_.placemarker.style.mozTransform    = 'translateX('+0+'%)';
 				_.placemarker.style.transform       = 'translateX('+0+'%)';
 				_.placemarker.style.borderColor       = '#f97bf2';
-				closeList();
+				close(_.list);
 		});
 
 		////////////////  show effects list
-		_.dropdown.addEventListener("click", toggleList);
+		_.dropdown.addEventListener("click", function(e){
+			toggle(_.list);
+		});
 		
 		on('effects', 'click', 'li', function(e) {
 			_.dropdown.querySelector( 'input' ).value = e.target.innerHTML;
 			_.dropdown.querySelector( 'span' ).innerHTML = e.target.innerHTML; // this is the clicked list item
-			toggleList();
+			toggle(_.list);
 		});
 		
 		
 		////////////////  sends selected file
-		_.uploadbtn.addEventListener("click", function () {
-			closeList();
+		_.uploadbtn.addEventListener("click", function (e) {
+			close(_.list);
 			_.workflow.style.webkitTransform = 'translateX(-'+200+'%)';
 			_.workflow.style.mozTransform    = 'translateX(-'+200+'%)';
 			_.workflow.style.transform       = 'translateX(-'+200+'%)';
@@ -166,7 +168,7 @@ var _ = {
 				  showInfo('An error occurred while submitting the form. Maybe your file is too big');
 				};
 				request.onload = function(e) {
-					console.log(e);
+					
 				};
 
 				//send request
@@ -214,17 +216,20 @@ function on(elSelector, eventName, selector, fn) {
 	});
 }
 
-function toggleList() {
-	if (!_.list.classList.contains("hidden")) {
-		_.list.classList.add("hidden");
+
+
+
+function toggle(element) {
+	if (!element.classList.contains("hidden")) {
+		element.classList.add("hidden");
 	}
 	else{
-		_.list.classList.remove("hidden");
+		element.classList.remove("hidden");
 	}
 }
 
-function closeList() {
-	if (!_.list.classList.contains("hidden")) {
-		_.list.classList.add("hidden");
+function close(element) {
+	if (!element.classList.contains("hidden")) {
+		element.classList.add("hidden");
 	}
 }
