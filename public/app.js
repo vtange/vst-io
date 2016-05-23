@@ -20,6 +20,7 @@ var _ = {
 		_.back = document.getElementById('back-btn');
 		_.uploadbtn = document.getElementById('upload-btn');
 		_.progressbar = document.getElementById('progress-bar');
+		_.progress = document.getElementById('hp-value');
 	},
 
 	//[init after getInteractables] assigns events
@@ -155,12 +156,17 @@ var _ = {
 				  if (e.lengthComputable) {
 					var percentage = (e.loaded / e.total) * 100;
 					_.progressbar.style.width = percentage + '%';
+						if(!percentage<100){
+							//100% upload, begin processing.
+							_.progress.innerHTML = "Processing File..."
+						}
 				  }
 				};
 				request.onerror = function(e) {
 				  showInfo('An error occurred while submitting the form. Maybe your file is too big');
 				};
-				request.onload = function() {
+				request.onload = function(e) {
+					console.log(e);
 				};
 
 				//send request
