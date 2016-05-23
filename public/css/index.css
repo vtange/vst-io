@@ -192,11 +192,11 @@ input[type="file"] {
 }
 
 /* style 5 */
-.inputfile-5 + label {
+.inputfile-5 + label, #finished-download + label {
 	cursor: pointer;
 }
 
-.inputfile-5 + label figure {
+.inputfile-5 + label figure,  #finished-download + label figure {
     width: 15rem;
     height: 18rem;
     background-color: #d3394c;
@@ -208,12 +208,18 @@ input[type="file"] {
 }
 
 .inputfile-5:focus + label figure,
+ #finished-download:focus + label figure,
 .inputfile-5.has-focus + label figure,
+ #finished-download.has-focus + label figure,
 .inputfile-5 + label:hover figure,
-.inputfile-5 + label:hover span {
+ #finished-download + label:hover figure,
+.inputfile-5 + label:hover span,
+ #finished-download + label:hover span {
     background-color: #722040;
 }
 
+ #finished-download + label figure::before,
+ #finished-download + label figure::after,
 .inputfile-5 + label figure::before,
 .inputfile-5 + label figure::after {
     width: 0;
@@ -223,29 +229,34 @@ input[type="file"] {
     top: 0;
     right: 0;
 }
-
+ #finished-download + label figure::before,
 .inputfile-5 + label figure::before {
     border-top: 3rem solid #dadada;
     border-left: 3rem solid transparent;
 }
-
+ #finished-download + label figure::after,
 .inputfile-5 + label figure::after {
     border-bottom: 3rem solid #722040;
     border-right: 3rem solid transparent;
 }
 
+ #finished-download:focus + label figure::after,
 .inputfile-5:focus + label figure::after,
+ #finished-download.has-focus + label figure::after,
 .inputfile-5.has-focus + label figure::after,
+ #finished-download + label:hover figure::after,
 .inputfile-5 + label:hover figure::after {
     border-bottom-color: #d3394c;
 }
 
+ #finished-download + label svg,
 .inputfile-5 + label svg {
     width: 100%;
     height: 100%;
     fill: #dadada;
 }
 
+ #finished-download + label > span,
 .inputfile-5 + label > span {
 	padding: 1rem;
 	font-size: 2rem;
