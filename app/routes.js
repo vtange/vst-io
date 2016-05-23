@@ -72,20 +72,10 @@ function deEss(fileName, outputName) {
 
 
 function SendFile(file, res){
-
-	var stream = fs.createReadStream(file);
-
-	// Handle non-existent file
-	stream.on('error', function(error) {
-		res.writeHead(404, 'Not Found');
-		res.write('404: File Not Found!');
-		res.end();
-	});
-
-	// File exists, stream it to user
-	res.set({'Content-Type': 'audio/mpeg'});
-	res.statusCode = 200;
-	stream.pipe(res);
+	var fileName = file.split('/workspace/').pop();
+	fs.rename(file, appRoot+"/public/finished/"+fileName);
+	res.status(200);
+	res.send('/finished/'+fileName);
 }
 
 function Convert(fn, fileName, outputName, res){
@@ -110,7 +100,7 @@ function VSTprocess(fn, fileName, outputName, outputExt, res){
 		});
 }
 
-var uploadFile = function(req, res) {
+var Upload = function(req, res) {
 	var file = req.files.audiofiles;
 	file.mv(workspace_dir + file.name, function(err) {
 		if (err) {
@@ -155,5 +145,5 @@ module.exports = function(app) {
  	// =====================================
     // UPLOAD ========
     // =====================================
-	app.post('/', uploadFile);
+	app.post('/process', Upload);
 };

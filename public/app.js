@@ -147,7 +147,7 @@ var _ = {
 
 				//// create request
 				var request = new XMLHttpRequest();
-				request.open("POST", window.location.href);
+				request.open("POST", window.location.href+"process");
 				
 				//// setup request
 				//request.setRequestHeader('Content-Type', 'multipart/form-data');
