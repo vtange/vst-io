@@ -177,6 +177,7 @@ var _ = {
 				request.onload = function(e) {
 					close(_.processing);
 					_.dllink.setAttribute('href',window.location.href+e.target.response);
+					_.dllink.setAttribute('download',e.target.response.split('finished/').pop());
 					open(_.finished);
 				};
 

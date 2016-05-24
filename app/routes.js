@@ -75,7 +75,7 @@ function SendFile(file, res){
 	var fileName = file.split('/workspace/').pop();
 	fs.rename(file, appRoot+"/public/finished/"+fileName);
 	res.status(200);
-	res.send('/finished/'+fileName);
+	res.send('finished/'+fileName);
 }
 
 function Convert(fn, fileName, outputName, res){
