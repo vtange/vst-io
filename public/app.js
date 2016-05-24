@@ -28,6 +28,12 @@ var _ = {
 
 	//[init after getInteractables] assigns events
 	initEvents : function(){
+		//if file still exists
+		if(_.fileupload.files[0]){
+			_.filelabel.querySelector( 'span' ).innerHTML = _.fileupload.files[0].name;
+			enable(_.uploadbtn);
+		}
+		
 		////////////////  next cycles forward
 		_.next.addEventListener("click", function (e) {
 				_.workflow.style.webkitTransform = 'translateX(-'+100+'%)';
@@ -123,7 +129,7 @@ var _ = {
 				fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
 			else*/
 				fileName = this.files[0].name;
-				_.uploadbtn.classList.remove("disabled");
+				enable(_.uploadbtn);
 
 			if( fileName )
 				_.filelabel.querySelector( 'span' ).innerHTML = fileName;
@@ -141,7 +147,7 @@ var _ = {
         if (_.validFiles.test(file.name.toLowerCase())) {
 			_.filelabel.querySelector( 'span' ).innerHTML = file.name;
 			_.fileupload.files[0] = file;
-			_.uploadbtn.classList.remove("disabled");
+			enable(_.uploadbtn);
         }
 		else {
 			alert("One or more of your files is not a valid audio file.");
@@ -251,5 +257,11 @@ function close(element) {
 function open(element) {
 	if (element.classList.contains("hidden")) {
 		element.classList.remove("hidden");
+	}
+}
+
+function enable(element) {
+	if (element.classList.contains("disabled")) {
+		element.classList.remove("disabled");
 	}
 }
