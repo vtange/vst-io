@@ -289,8 +289,6 @@ input[type="file"] {
     border-right: 3rem solid transparent;
 }
 
- #finished-download:focus > label figure::after,
- #finished-download.has-focus > label figure::after,
  #finished-download > label:hover figure::after {
 	border-bottom-color: #f97c45;
 }

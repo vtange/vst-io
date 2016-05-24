@@ -71,14 +71,17 @@ function deEss(fileName, outputName) {
 function CleanUp(file){
 	fs.unlink(file, function(err) {
 		if (err) console.log(err);
-		console.log('file successfully deleted');
 	});
 }
 
-
 function SendFile(file, res){
 	var fileName = file.split('/workspace/').pop();
-	fs.rename(file, appRoot+"/public/finished/"+fileName);
+	var newLoc = appRoot+"/public/finished/"+fileName;
+	fs.rename(file, newLoc);
+	//host file for 8 hrs before deleting
+	setTimeout( function(){
+		CleanUp(newLoc);
+	},  60 * 60 * 1000);
 	res.status(200);
 	res.send('finished/'+fileName);
 }
