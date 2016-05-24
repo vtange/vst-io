@@ -67,6 +67,11 @@ function deEss(fileName, outputName) {
 	});
 };
 
+function Louder(fileName, outputName) {
+	return new Promise(function(resolve, reject) {
+		host.processAudio( fileName, outputName, [{name:vst_dir+"Louder.dll", preset:vst_dir+"Louder.fxp"}], resolve, reject);
+	});
+};
 
 function CleanUp(file){
 	fs.unlink(file, function(err) {
@@ -122,7 +127,7 @@ var Upload = function(req, res) {
 		}
 		else {
 			//determine what process from req.body
-			var vst = deEss;
+			var vst = req.body.vsts === "Louder" ? Louder : deEss;
 
 			//process
 			var origExt = file.name.split('.').pop();
