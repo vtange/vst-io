@@ -24,7 +24,7 @@ body:after {
 	z-index: -11;
 	background:rgba(217,217,217,0.2);
 }
-body, .btn {
+body {
 	color:#889499;
 }
 #header > #group1 > a {
@@ -192,12 +192,12 @@ input[type="file"] {
 }
 
 /* style 5 */
-.inputfile-5 + label, #finished-download + label {
+.inputfile-5 + label, #finished-download > label {
 	cursor: pointer;
 	text-align: center;
 }
 
-.inputfile-5 + label figure,  #finished-download + label figure {
+.inputfile-5 + label figure,  #finished-download > label figure {
     width: 15rem;
     height: 18rem;
     background-color: #d3394c;
@@ -209,18 +209,18 @@ input[type="file"] {
 }
 
 .inputfile-5:focus + label figure,
- #finished-download:focus + label figure,
+ #finished-download:focus > label figure,
 .inputfile-5.has-focus + label figure,
- #finished-download.has-focus + label figure,
+ #finished-download.has-focus > label figure,
 .inputfile-5 + label:hover figure,
- #finished-download + label:hover figure,
+ #finished-download > label:hover figure,
 .inputfile-5 + label:hover span,
- #finished-download + label:hover span {
+ #finished-download > label:hover span {
     background-color: #722040;
 }
 
- #finished-download + label figure::before,
- #finished-download + label figure::after,
+ #finished-download > label figure::before,
+ #finished-download > label figure::after,
 .inputfile-5 + label figure::before,
 .inputfile-5 + label figure::after {
     width: 0;
@@ -230,34 +230,34 @@ input[type="file"] {
     top: 0;
     right: 0;
 }
- #finished-download + label figure::before,
+ #finished-download > label figure::before,
 .inputfile-5 + label figure::before {
     border-top: 3rem solid #dadada;
     border-left: 3rem solid transparent;
 }
- #finished-download + label figure::after,
+ #finished-download > label figure::after,
 .inputfile-5 + label figure::after {
     border-bottom: 3rem solid #722040;
     border-right: 3rem solid transparent;
 }
 
- #finished-download:focus + label figure::after,
+ #finished-download:focus > label figure::after,
 .inputfile-5:focus + label figure::after,
- #finished-download.has-focus + label figure::after,
+ #finished-download.has-focus > label figure::after,
 .inputfile-5.has-focus + label figure::after,
- #finished-download + label:hover figure::after,
+ #finished-download > label:hover figure::after,
 .inputfile-5 + label:hover figure::after {
     border-bottom-color: #d3394c;
 }
 
- #finished-download + label svg,
+ #finished-download > label svg,
 .inputfile-5 + label svg {
     width: 100%;
     height: 100%;
     fill: #dadada;
 }
 
- #finished-download + label > span,
+ #finished-download > label > span,
 .inputfile-5 + label > span {
 	padding: 1rem;
 	font-size: 2rem;
@@ -342,6 +342,51 @@ input[type="file"] {
     font-weight: bold;
 	padding:0.6rem;
 	color:#dadada;
+}
+/*------------*/
+/* CUSTOM LOADING CIRCLE */
+/*-------------*/
+#processing {
+	position: relative;
+	top:50%;
+	margin: auto;
+	font-size: 10px;
+	text-indent: -9999em;
+	border-top: 1.1em solid #aab4bb;
+	border-right: 1.1em solid #aab4bb;
+	border-bottom: 1.1em solid #aab4bb;
+	border-left: 1.1em solid #889499;
+	-webkit-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	transform: translateZ(0);
+	-webkit-animation: load8 1.1s infinite linear;
+	animation: load8 1.1s infinite linear;
+}
+#processing,
+#processing:after {
+	border-radius: 50%;
+	width: 10em;
+	height: 10em;
+}
+@-webkit-keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
 /*------------*/
 /* FOOTER */
