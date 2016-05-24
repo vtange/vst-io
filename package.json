@@ -22,7 +22,6 @@
     "method-override": "~1.0.0",
     "mongoose": "~3.8.1",
     "morgan": "~1.0.0",
-    "multer": "^1.1.0",
     "node-vst-host": "https://github.com/vtange/node-vst-host",
     "passport": "~0.1.17",
     "passport-local": "~0.1.6",
