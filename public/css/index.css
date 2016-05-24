@@ -171,7 +171,7 @@ body {
     border-color: transparent #d3394c;    
 }
 
-#next-btn:hover, #back-btn:hover, #upload-btn:hover, .btn:hover{
+#next-btn:hover, #back-btn:hover, #upload-btn:hover, #upload-btn.disabled, .btn:hover{
     background-color: #722040;
 }
 #next-btn:hover:after, #back-btn:hover:before {

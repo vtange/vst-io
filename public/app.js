@@ -65,18 +65,20 @@ var _ = {
 		
 		////////////////  sends selected file
 		_.uploadbtn.addEventListener("click", function (e) {
-			close(_.list);
-			close(_.processing);
-			close(_.finished);
-			open(_.progress);
-			_.workflow.style.webkitTransform = 'translateX(-'+200+'%)';
-			_.workflow.style.mozTransform    = 'translateX(-'+200+'%)';
-			_.workflow.style.transform       = 'translateX(-'+200+'%)';
-			_.placemarker.style.webkitTransform = 'translateX('+200+'%)';
-			_.placemarker.style.mozTransform    = 'translateX('+200+'%)';
-			_.placemarker.style.transform       = 'translateX('+200+'%)';
-			_.placemarker.style.borderColor       = '#f97c45';
-			_.sendFiles();
+			if(_.fileupload.files[0]){
+				close(_.list);
+				close(_.processing);
+				close(_.finished);
+				open(_.progress);
+				_.workflow.style.webkitTransform = 'translateX(-'+200+'%)';
+				_.workflow.style.mozTransform    = 'translateX(-'+200+'%)';
+				_.workflow.style.transform       = 'translateX(-'+200+'%)';
+				_.placemarker.style.webkitTransform = 'translateX('+200+'%)';
+				_.placemarker.style.mozTransform    = 'translateX('+200+'%)';
+				_.placemarker.style.transform       = 'translateX('+200+'%)';
+				_.placemarker.style.borderColor       = '#f97c45';
+				_.sendFiles();
+			}
 		});
 
 		////////////////  drag and drop
@@ -121,6 +123,7 @@ var _ = {
 				fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
 			else*/
 				fileName = this.files[0].name;
+				_.uploadbtn.classList.remove("disabled");
 
 			if( fileName )
 				_.filelabel.querySelector( 'span' ).innerHTML = fileName;
@@ -138,6 +141,7 @@ var _ = {
         if (_.validFiles.test(file.name.toLowerCase())) {
 			_.filelabel.querySelector( 'span' ).innerHTML = file.name;
 			_.fileupload.files[0] = file;
+			_.uploadbtn.classList.remove("disabled");
         }
 		else {
 			alert("One or more of your files is not a valid audio file.");
