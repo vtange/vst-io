@@ -68,7 +68,12 @@ function deEss(fileName, outputName) {
 };
 
 
-
+function CleanUp(file){
+	fs.unlink(file, function(err) {
+		if (err) console.log(err);
+		console.log('file successfully deleted');
+	});
+}
 
 
 function SendFile(file, res){
@@ -81,6 +86,8 @@ function SendFile(file, res){
 function Convert(fn, fileName, outputName, res){
 	fn(fileName,outputName)
 		.then(function(){
+			//delete input file
+		    CleanUp(fileName);
 			//send download link
 			SendFile(outputName,res);
 		});
@@ -90,6 +97,9 @@ function VSTprocess(fn, fileName, outputName, outputExt, res){
 	var fin_extens = toMp3;
 	fn(fileName, outputName)
 		.then(function(){
+			//delete input file
+ 			CleanUp(fileName);
+		
 			//if outputExt is not wav
 			Convert(fin_extens, outputName, outputName.split('.').shift()+"."+outputExt, res);
 			//else, send download link
@@ -117,6 +127,8 @@ var Upload = function(req, res) {
 			//default processing (conv to WAV, process, output WAV)
 			toWav( workspace_dir + file.name, workspace_dir + outputWav )
 			.then(function(){
+				//delete input file
+				CleanUp(workspace_dir + file.name);
 				//goodCB -> process with VST
 				VSTprocess(vst, workspace_dir + outputWav,  workspace_dir + "[tweak]"+outputWav, origExt, res);
 
