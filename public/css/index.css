@@ -374,6 +374,9 @@ input[type="file"] {
 /* CUSTOM LOADING CIRCLE */
 /*-------------*/
 #processing {
+	text-align: center;
+}
+.process-circle {
 	position: relative;
 	top:50%;
 	margin: auto;
@@ -389,8 +392,8 @@ input[type="file"] {
 	-webkit-animation: load8 1.1s infinite linear;
 	animation: load8 1.1s infinite linear;
 }
-#processing,
-#processing:after {
+.process-circle,
+.process-circle:after {
 	border-radius: 50%;
 	width: 10em;
 	height: 10em;
