@@ -20,7 +20,10 @@ var _ = {
 		_.back = document.getElementById('back-btn');
 		_.uploadbtn = document.getElementById('upload-btn');
 		_.progressbar = document.getElementById('progress-bar');
-		_.progress = document.getElementById('hp-value');
+		_.progress = document.getElementById('progress');
+		_.processing = document.getElementById('processing');
+		_.finished = document.getElementById('finished');
+		_.dllink = document.getElementById('finished-download');
 	},
 
 	//[init after getInteractables] assigns events
@@ -63,6 +66,9 @@ var _ = {
 		////////////////  sends selected file
 		_.uploadbtn.addEventListener("click", function (e) {
 			close(_.list);
+			close(_.processing);
+			close(_.finished);
+			open(_.progress);
 			_.workflow.style.webkitTransform = 'translateX(-'+200+'%)';
 			_.workflow.style.mozTransform    = 'translateX(-'+200+'%)';
 			_.workflow.style.transform       = 'translateX(-'+200+'%)';
@@ -160,7 +166,8 @@ var _ = {
 					_.progressbar.style.width = percentage + '%';
 						if(!percentage<100){
 							//100% upload, begin processing.
-							_.progress.innerHTML = "Processing&hellip;"
+							close(_.progress);
+							open(_.processing);
 						}
 				  }
 				};
@@ -168,7 +175,9 @@ var _ = {
 				  showInfo('An error occurred while submitting the form. Maybe your file is too big');
 				};
 				request.onload = function(e) {
-					
+					close(_.processing);
+					_.dllink.setAttribute('href',window.location.href+e.target.response);
+					open(_.finished);
 				};
 
 				//send request
@@ -231,5 +240,11 @@ function toggle(element) {
 function close(element) {
 	if (!element.classList.contains("hidden")) {
 		element.classList.add("hidden");
+	}
+}
+
+function open(element) {
+	if (element.classList.contains("hidden")) {
+		element.classList.remove("hidden");
 	}
 }

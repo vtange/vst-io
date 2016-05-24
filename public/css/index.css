@@ -194,6 +194,7 @@ input[type="file"] {
 /* style 5 */
 .inputfile-5 + label, #finished-download + label {
 	cursor: pointer;
+	text-align: center;
 }
 
 .inputfile-5 + label figure,  #finished-download + label figure {
