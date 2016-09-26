@@ -2,7 +2,7 @@
   "name": "vst-io",
   "title": "tweak.audio",
   "version": "1.0.0",
-  "description": "New App Goodness",
+  "description": "NodeJS web-app for quickly applying VST effects on audio files. ***NOTE: You must have VST2 in .dll format and preset in .fxp format in server.js directory***",
   "scripts": {
     "start": "node server.js"
   },
